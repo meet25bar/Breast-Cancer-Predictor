@@ -1,0 +1,514 @@
+/* ==========================================================================
+   Breast Cancer Predictor — Pink Awareness Theme
+   ========================================================================== */
+
+/* ---------- Google Font ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ---------- Design Tokens ---------- */
+:root {
+  /* Pink palette inspired by breast-cancer awareness ribbon */
+  --pink-50:  #fdf2f8;
+  --pink-100: #fce7f3;
+  --pink-200: #fbcfe8;
+  --pink-300: #f9a8d4;
+  --pink-400: #f472b6;
+  --pink-500: #ec4899;
+  --pink-600: #db2777;
+  --pink-700: #be185d;
+  --pink-800: #9d174d;
+  --pink-900: #831843;
+
+  /* Neutral dark tones */
+  --dark-bg:  #1a0a12;
+  --dark-surface: rgba(40, 12, 28, 0.65);
+  --dark-card: rgba(60, 18, 40, 0.45);
+
+  /* Glass */
+  --glass-border: rgba(244, 114, 182, 0.25);
+  --glass-blur: 18px;
+
+  /* Text */
+  --text-primary:   #fdf2f8;
+  --text-secondary:  #f9a8d4;
+  --text-muted:      #d4849e;
+
+  /* Misc */
+  --radius: 16px;
+  --transition: 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--dark-bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ---------- Animated Background ---------- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(219, 39, 119, .18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(244, 114, 182, .12) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(190, 24, 93, .10) 0%, transparent 50%);
+}
+
+/* Floating ribbon-like orbs */
+body::after {
+  content: '';
+  position: fixed;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(236, 72, 153, .12), transparent 70%);
+  top: -100px;
+  right: -100px;
+  z-index: -1;
+  animation: floatOrb 12s ease-in-out infinite alternate;
+}
+
+@keyframes floatOrb {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-60px, 80px) scale(1.15); }
+}
+
+/* ---------- Layout ---------- */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+/* ---------- Header / Hero ---------- */
+.hero {
+  text-align: center;
+  padding: 3rem 0 2.5rem;
+  animation: fadeInDown .8s ease-out;
+}
+
+.hero__ribbon {
+  font-size: 3.5rem;
+  margin-bottom: .75rem;
+  display: inline-block;
+  filter: drop-shadow(0 0 18px rgba(236, 72, 153, .5));
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.08); }
+}
+
+.hero h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--pink-300), var(--pink-500), var(--pink-300));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+.hero p {
+  margin-top: .6rem;
+  color: var(--text-muted);
+  font-size: 1rem;
+  max-width: 540px;
+  margin-inline: auto;
+}
+
+/* ---------- Glass Card ---------- */
+.card {
+  background: var(--dark-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  padding: 2rem;
+  margin-bottom: 1.75rem;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, .35),
+    inset 0 1px 0 rgba(244, 114, 182, .08);
+  animation: fadeInUp .7s ease-out both;
+}
+
+.card:nth-child(2) { animation-delay: .1s; }
+.card:nth-child(3) { animation-delay: .2s; }
+
+.card__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--pink-300);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.card__title span { font-size: 1.2rem; }
+
+/* ---------- Feature Grid ---------- */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+/* ---------- Slider Group ---------- */
+.slider-group {
+  background: rgba(40, 12, 28, .5);
+  border: 1px solid rgba(244, 114, 182, .12);
+  border-radius: 12px;
+  padding: 1rem 1.15rem;
+  transition: var(--transition);
+}
+
+.slider-group:hover {
+  border-color: var(--pink-500);
+  box-shadow: 0 0 20px rgba(236, 72, 153, .12);
+  transform: translateY(-2px);
+}
+
+.slider-group label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: .6rem;
+}
+
+.label-info-wrapper {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.info-tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: help;
+}
+
+.info-icon {
+  font-size: .9rem;
+  opacity: 0.7;
+  transition: var(--transition);
+}
+
+.info-tooltip:hover .info-icon {
+  opacity: 1;
+}
+
+.tooltip-text {
+  position: absolute;
+  bottom: 150%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--dark-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--pink-700);
+  padding: .6rem .85rem;
+  border-radius: 8px;
+  font-size: .75rem;
+  font-weight: 400;
+  line-height: 1.4;
+  white-space: normal;
+  width: max-content;
+  max-width: 220px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, .5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all .2s cubic-bezier(.4,0,.2,1);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.info-tooltip:hover .tooltip-text {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.slider-group label .value-badge {
+  background: var(--pink-700);
+  color: var(--pink-100);
+  font-weight: 700;
+  font-size: .8rem;
+  padding: .15rem .55rem;
+  border-radius: 8px;
+  min-width: 28px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.slider-group:hover .value-badge {
+  background: var(--pink-500);
+}
+
+/* ---------- Range Slider ---------- */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--pink-700) 0%, var(--pink-800) 100%);
+  outline: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+input[type="range"]:hover {
+  background: linear-gradient(90deg, var(--pink-500), var(--pink-700));
+}
+
+/* Thumb – WebKit */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--pink-400);
+  border: 3px solid var(--dark-bg);
+  box-shadow: 0 0 10px rgba(236, 72, 153, .45);
+  transition: var(--transition);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: var(--pink-300);
+  box-shadow: 0 0 18px rgba(236, 72, 153, .7);
+  transform: scale(1.15);
+}
+
+/* Thumb – Firefox */
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--pink-400);
+  border: 3px solid var(--dark-bg);
+  box-shadow: 0 0 10px rgba(236, 72, 153, .45);
+  cursor: pointer;
+}
+
+/* ---------- Predict Button ---------- */
+.btn-predict {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  width: 100%;
+  padding: 1rem;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, var(--pink-600), var(--pink-500));
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.btn-predict::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(255,255,255,.12), transparent);
+  transform: translateX(-100%);
+  transition: transform .5s ease;
+}
+
+.btn-predict:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(219, 39, 119, .45);
+}
+
+.btn-predict:hover::before {
+  transform: translateX(100%);
+}
+
+.btn-predict:active {
+  transform: translateY(0);
+}
+
+.btn-predict:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Spinner */
+.spinner {
+  display: none;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+
+.btn-predict.loading .spinner { display: inline-block; }
+.btn-predict.loading .btn-text { display: none; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Result Card ---------- */
+.result-card {
+  display: none;
+  text-align: center;
+  padding: 2.5rem 2rem;
+}
+
+.result-card.show {
+  display: block;
+  animation: fadeInUp .5s ease-out;
+}
+
+.result-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.result-label {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: .4rem;
+}
+
+.result-confidence {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.result-bar-container {
+  background: rgba(40, 12, 28, .6);
+  border-radius: 8px;
+  height: 10px;
+  overflow: hidden;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.result-bar {
+  height: 100%;
+  border-radius: 8px;
+  transition: width .8s cubic-bezier(.4,0,.2,1);
+}
+
+/* Benign variant */
+.result-card.benign .result-label { color: #34d399; }
+.result-card.benign .result-bar  { background: linear-gradient(90deg, #34d399, #6ee7b7); }
+.result-card.benign { border-color: rgba(52, 211, 153, .3); box-shadow: 0 0 40px rgba(52, 211, 153, .08); }
+
+/* Malignant variant */
+.result-card.malignant .result-label { color: var(--pink-400); }
+.result-card.malignant .result-bar  { background: linear-gradient(90deg, var(--pink-500), var(--pink-300)); }
+.result-card.malignant { border-color: rgba(244, 114, 182, .35); box-shadow: 0 0 40px rgba(236, 72, 153, .12); }
+
+/* Result description */
+.result-description {
+  margin-top: 1.5rem;
+  text-align: left;
+  background: rgba(30, 10, 20, .5);
+  border: 1px solid rgba(244, 114, 182, .12);
+  border-radius: 12px;
+  padding: 1.15rem 1.35rem;
+  max-width: 480px;
+  margin-inline: auto;
+  animation: fadeInUp .6s ease-out .2s both;
+}
+
+.result-description strong {
+  display: block;
+  font-size: .95rem;
+  margin-bottom: .45rem;
+  color: var(--text-primary);
+}
+
+.result-description p {
+  font-size: .85rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.result-card.benign .result-description { border-color: rgba(52, 211, 153, .2); }
+.result-card.malignant .result-description { border-color: rgba(244, 114, 182, .2); }
+
+/* ---------- Footer ---------- */
+.footer {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  color: var(--text-muted);
+  font-size: .8rem;
+  opacity: .7;
+}
+
+.footer a {
+  color: var(--pink-400);
+  text-decoration: none;
+}
+
+/* ---------- Utility Animations ---------- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Info Banner ---------- */
+.info-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  background: rgba(244, 114, 182, .08);
+  border: 1px solid rgba(244, 114, 182, .15);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.75rem;
+  font-size: .88rem;
+  color: var(--text-secondary);
+  animation: fadeInUp .6s ease-out .3s both;
+}
+
+.info-banner .icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.6rem; }
+  .hero__ribbon { font-size: 2.8rem; }
+  .features-grid { grid-template-columns: 1fr; }
+  .card { padding: 1.25rem; }
+}
