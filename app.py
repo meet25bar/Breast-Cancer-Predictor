@@ -8,15 +8,11 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import List
 
-# ---------------------------------------------------------------------------
-# Load model once at startup
-# ---------------------------------------------------------------------------
+
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "model.pkl")
 model = joblib.load(MODEL_PATH)
 
-# ---------------------------------------------------------------------------
-# FastAPI app
-# ---------------------------------------------------------------------------
+
 app = FastAPI(title="Breast Cancer Predictor API")
 
 app.add_middleware(
@@ -26,9 +22,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ---------------------------------------------------------------------------
-# Request / Response schemas
-# ---------------------------------------------------------------------------
+
 class PredictionRequest(BaseModel):
     features: List[float]  # exactly 9 values expected
 
@@ -36,9 +30,6 @@ class PredictionResponse(BaseModel):
     prediction: str        # "Benign" or "Malignant"
     cancer_risk: float     # probability of the malignant class (cancer risk)
 
-# ---------------------------------------------------------------------------
-# Prediction endpoint
-# ---------------------------------------------------------------------------
 @app.post("/predict", response_model=PredictionResponse)
 async def predict(req: PredictionRequest):
     arr = np.array([req.features])
@@ -53,9 +44,7 @@ async def predict(req: PredictionRequest):
 
     return PredictionResponse(prediction=label, cancer_risk=cancer_risk)
 
-# ---------------------------------------------------------------------------
-# Serve static frontend
-# ---------------------------------------------------------------------------
+
 STATIC_DIR = os.path.join(os.path.dirname(__file__), "static")
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
@@ -63,9 +52,7 @@ app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 async def root():
     return FileResponse(os.path.join(STATIC_DIR, "index.html"))
 
-# ---------------------------------------------------------------------------
-# Run with: python app.py
-# ---------------------------------------------------------------------------
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
