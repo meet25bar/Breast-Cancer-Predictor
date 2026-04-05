@@ -17,5 +17,4 @@ env/
 *.csv
 breast_cancer.csv
 
-# Optional: model.pkl (if you want users to train it themselves)
-# model.pkl
+
