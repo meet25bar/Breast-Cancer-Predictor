@@ -1,6 +1,3 @@
-// ==========================================================================
-//  Breast Cancer Predictor — Frontend Logic
-// ==========================================================================
 
 const FEATURES = [
   { id: 'clump_thickness',       label: 'Clump Thickness',              min: 1, max: 10, default: 5, info: 'Assessment of cell grouping. Benign cells are in monolayers; malignant cells form multi-layered clumps.' },
@@ -14,7 +11,6 @@ const FEATURES = [
   { id: 'mitoses',               label: 'Mitoses',                      min: 1, max: 10, default: 1, info: 'Rate of cell division. High mitotic activity is a sign of cancer.' },
 ];
 
-// ---------- Build slider UI ----------
 function buildSliders() {
   const grid = document.getElementById('features-grid');
   FEATURES.forEach(f => {
@@ -41,17 +37,17 @@ function buildSliders() {
   });
 }
 
-// ---------- Collect feature values ----------
+
 function getFeatures() {
   return FEATURES.map(f => parseFloat(document.getElementById(f.id).value));
 }
 
-// ---------- Call prediction API ----------
+
 async function predict() {
   const btn = document.getElementById('predict-btn');
   const resultCard = document.getElementById('result-card');
 
-  // Start loading
+ 
   btn.classList.add('loading');
   btn.disabled = true;
   resultCard.classList.remove('show', 'benign', 'malignant');
@@ -75,7 +71,7 @@ async function predict() {
   }
 }
 
-// ---------- Result descriptions ----------
+
 const DESCRIPTIONS = {
   Benign: {
     title: '💚 Likely Non-Cancerous',
@@ -87,7 +83,7 @@ const DESCRIPTIONS = {
   },
 };
 
-// ---------- Display result ----------
+
 function showResult({ prediction, cancer_risk }) {
   const card      = document.getElementById('result-card');
   const icon      = document.getElementById('result-icon');
@@ -114,7 +110,7 @@ function showResult({ prediction, cancer_risk }) {
   });
 }
 
-// ---------- Init ----------
+
 document.addEventListener('DOMContentLoaded', () => {
   buildSliders();
   document.getElementById('predict-btn').addEventListener('click', predict);
