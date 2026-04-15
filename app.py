@@ -11,7 +11,6 @@ from typing import List
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "model.pkl")
 model = joblib.load(MODEL_PATH)
 
-
 app = FastAPI(title="Breast Cancer Predictor API")
 
 app.add_middleware(
