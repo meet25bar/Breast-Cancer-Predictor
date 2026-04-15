@@ -8,7 +8,6 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import List
 
-
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "model.pkl")
 model = joblib.load(MODEL_PATH)
 
