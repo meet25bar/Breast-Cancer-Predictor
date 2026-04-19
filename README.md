@@ -1,4 +1,4 @@
-                                                                        🎗️ Breast Cancer Prediction System
+                                                                  🎗️ Breast Cancer Prediction System
 
 A machine learning-based web application that predicts whether a breast tumor is benign or malignant using a Logistic Regression model trained on medical diagnostic features.
 
