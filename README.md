@@ -56,9 +56,11 @@ python predict.py
 Loads the saved model
 Accepts input from terminal
 Outputs prediction (Benign / Malignant)
+
 📊 Model Performance
 Accuracy: ~94%
 Evaluation Method: 10-Fold Cross Validation
+
 🧠 Tech Stack
 Python
 Scikit-learn
@@ -66,6 +68,7 @@ Pandas
 NumPy
 FastAPI
 HTML, CSS, JavaScript
+
 📁 Project Structure
 
 breast-cancer-predictor/
@@ -83,6 +86,7 @@ Add advanced models (Random Forest, XGBoost)
 Deploy to cloud platforms
 Add user authentication
 Improve UI with visual analytics
+
 🤝 Contributing
 
 Contributions are welcome! Fork the repo and submit a pull request.
