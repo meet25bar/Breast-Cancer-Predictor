@@ -20,7 +20,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 class PredictionRequest(BaseModel):
     features: List[float]  # exactly 9 values expected
 
