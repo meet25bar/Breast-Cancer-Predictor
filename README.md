@@ -23,6 +23,7 @@ Bare Nuclei
 Bland Chromatin
 Normal Nucleoli
 Mitoses
+
 ⚙️ Installation
 Clone the repository
 
@@ -49,6 +50,8 @@ python train_model.py
 
 Trains the Logistic Regression model
 Saves the trained model as model.pkl
+
+
 🔍 Make Predictions
 
 python predict.py
