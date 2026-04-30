@@ -27,6 +27,7 @@ class PredictionResponse(BaseModel):
     prediction: str        # "Benign" or "Malignant"
     cancer_risk: float     # probability of the malignant class (cancer risk)
 
+
 @app.post("/predict", response_model=PredictionResponse)
 async def predict(req: PredictionRequest):
     arr = np.array([req.features])
